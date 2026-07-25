@@ -1,3 +1,5 @@
+declare const atom: any
+
 const {CompositeDisposable, Disposable} = require('atom')
 const {isFunction, isString} = require('./type-helpers')
 const {Selector} = require('selector-kit')

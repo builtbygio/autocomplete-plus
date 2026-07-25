@@ -1,3 +1,5 @@
+declare const atom: any
+
 const {CompositeDisposable} = require('atom')
 const SnippetParser = require('./snippet-parser')
 const {isString} = require('./type-helpers')

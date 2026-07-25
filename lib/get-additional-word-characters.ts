@@ -1,3 +1,5 @@
+declare const atom: any
+
 const POSSIBLE_WORD_CHARACTERS = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?_-…'.split('')
 
 module.exports =

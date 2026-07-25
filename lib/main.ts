@@ -1,3 +1,5 @@
+declare const atom: any
+
 const {CompositeDisposable} = require('atom')
 const AutocompleteManager = require('./autocomplete-manager')
 
