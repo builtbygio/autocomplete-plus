@@ -71,4 +71,4 @@ const selectorsMatchScopeChain = (selectors, scopeChain) => { return selectorFor
 
 const buildScopeChainString = (scopes) => { return `.${scopes.join(' .')}` }
 
-export { selectorsMatchScopeChain, selectorForScopeChain, buildScopeChainString }
+module.exports = { selectorsMatchScopeChain, selectorForScopeChain, buildScopeChainString }

@@ -3,7 +3,7 @@
 import { Selector } from 'selector-kit'
 import { selectorForScopeChain, selectorsMatchScopeChain } from './scope-helpers'
 
-export default class ProviderMetadata {
+class ProviderMetadata {
   constructor (provider, apiVersion) {
     this.provider = provider
     this.apiVersion = apiVersion
@@ -67,3 +67,5 @@ export default class ProviderMetadata {
     }
   }
 }
+
+module.exports = ProviderMetadata

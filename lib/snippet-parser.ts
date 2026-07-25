@@ -1,6 +1,6 @@
 'use babel'
 
-export default class SnippetParser {
+class SnippetParser {
   reset () {
     this.inSnippet = false
     this.inSnippetBody = false
@@ -97,3 +97,5 @@ export default class SnippetParser {
 };
 
 const removeCharFromString = (str, index) => str.slice(0, index) + str.slice(index + 1)
+
+module.exports = SnippetParser

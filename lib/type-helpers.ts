@@ -10,4 +10,4 @@ const isType = (value, typeName) => {
   return t === typeName
 }
 
-export { isFunction, isString }
+module.exports = { isFunction, isString }
