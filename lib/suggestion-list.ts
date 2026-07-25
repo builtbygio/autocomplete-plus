@@ -1,3 +1,5 @@
+declare const atom: any
+
 const {Emitter, CompositeDisposable} = require('atom')
 const { UnicodeLetters } = require('./unicode-helpers')
 const SuggestionListElement = require('./suggestion-list-element')

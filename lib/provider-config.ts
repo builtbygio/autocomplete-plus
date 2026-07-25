@@ -1,3 +1,5 @@
+declare const atom: any
+
 const { Selector } = require('selector-kit')
 const {selectorsMatchScopeChain} = require('./scope-helpers')
 

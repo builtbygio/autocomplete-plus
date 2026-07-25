@@ -1,3 +1,5 @@
+declare const atom: any
+
 const { CompositeDisposable, TextBuffer } = require('atom')
 const ProviderConfig = require('./provider-config')
 const getAdditionalWordCharacters = require('./get-additional-word-characters')

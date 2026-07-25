@@ -1,3 +1,5 @@
+declare const atom: any
+
 const {CompositeDisposable, Disposable, Point, Range} = require('atom')
 const path = require('path')
 const fuzzaldrin = require('fuzzaldrin')
