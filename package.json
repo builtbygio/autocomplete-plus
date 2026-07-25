@@ -3,10 +3,11 @@
   "version": "2.42.4",
   "main": "./lib/main",
   "description": "Display possible completions in the editor while typing",
-  "repository": "https://github.com/atom/autocomplete-plus",
+  "repository": "https://github.com/builtbygio/autocomplete-plus",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.189.0 <2.0.0"
+    "atom": ">=0.189.0 <2.0.0",
+    "chevron": "*"
   },
   "dependencies": {
     "atom-slick": "^2.0.0",
