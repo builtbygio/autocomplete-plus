@@ -119,7 +119,7 @@ describe('SubsequenceProvider', () => {
 
   it('does not output suggestions from the other buffer', async () => {
     await atom.packages.activatePackage('language-coffee-script')
-    const coffeeEditor = await atom.workspace.open('sample.coffee')
+    const coffeeEditor = await atom.workspace.open('sample.js')
     const suggestions = await suggestionsForPrefix(provider, coffeeEditor, 'item')
 
     expect(suggestions).toHaveLength(0)
@@ -246,7 +246,7 @@ describe('SubsequenceProvider', () => {
       atom.config.set('autocomplete-plus.includeCompletionsFromAllBuffers', true)
 
       await atom.packages.activatePackage('language-coffee-script')
-      editor = await atom.workspace.open('sample.coffee')
+      editor = await atom.workspace.open('sample.js')
     })
 
     afterEach(() => {
