@@ -140,10 +140,9 @@ module.exports = class SuggestionListElement {
     if (item.descriptionMarkdown && item.descriptionMarkdown.length > 0) {
       this.descriptionContainer.style.display = 'block'
       this.descriptionContent.innerHTML = createDOMPurify().sanitize(
-        marked(item.descriptionMarkdown, {
+        marked.parse(item.descriptionMarkdown, {
           gfm: true,
-          breaks: true,
-          sanitize: false
+          breaks: true
         })
       )
       this.setDescriptionMoreLink(item)
