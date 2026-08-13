@@ -1,6 +1,6 @@
 declare const atom: any
 
-const { CompositeDisposable, TextBuffer } = require('atom')
+const { CompositeDisposable, TextBuffer } = require('chevron')
 const ProviderConfig = require('./provider-config')
 const getAdditionalWordCharacters = require('./get-additional-word-characters')
 

@@ -1,6 +1,6 @@
 declare const atom: any
 
-const {CompositeDisposable, Disposable, Point, Range} = require('atom')
+const {CompositeDisposable, Disposable, Point, Range} = require('chevron')
 const path = require('path')
 const fuzzaldrin = require('fuzzaldrin')
 const fuzzaldrinPlus = require('fuzzaldrin-plus')

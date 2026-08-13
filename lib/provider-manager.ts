@@ -1,6 +1,6 @@
 declare const atom: any
 
-const {CompositeDisposable, Disposable} = require('atom')
+const {CompositeDisposable, Disposable} = require('chevron')
 const {isFunction, isString} = require('./type-helpers')
 const {Selector} = require('selector-kit')
 const stableSort = require('stable')

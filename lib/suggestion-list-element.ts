@@ -1,6 +1,6 @@
 declare const atom: any
 
-const {CompositeDisposable} = require('atom')
+const {CompositeDisposable} = require('chevron')
 const SnippetParser = require('./snippet-parser')
 const {isString} = require('./type-helpers')
 const fuzzaldrinPlus = require('fuzzaldrin-plus')

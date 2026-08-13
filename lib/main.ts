@@ -1,6 +1,6 @@
 declare const atom: any
 
-const {CompositeDisposable} = require('atom')
+const {CompositeDisposable} = require('chevron')
 const AutocompleteManager = require('./autocomplete-manager')
 
 module.exports = {
