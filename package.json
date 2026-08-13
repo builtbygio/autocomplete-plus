@@ -1,6 +1,6 @@
 {
   "name": "autocomplete-plus",
-  "version": "2.42.4",
+  "version": "2.42.6",
   "main": "./lib/main",
   "description": "Display possible completions in the editor while typing",
   "repository": "https://github.com/builtbygio/autocomplete-plus",
@@ -22,7 +22,6 @@
     "underscore-plus": "^1.6.6"
   },
   "devDependencies": {
-    "coffeelint": "^1.9.7",
     "fs-plus": ">=2.4.0",
     "standard": "^8.3.0",
     "temp": ">=0.7.0"
