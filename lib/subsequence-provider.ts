@@ -51,8 +51,8 @@ class SubsequenceProvider {
   }
 
   defaults () {
-    this.atomConfig = atom.config
-    this.atomWorkspace = atom.workspace
+    this.atomConfig = chevron.config
+    this.atomWorkspace = chevron.workspace
 
     this.possibleWordCharacters = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?_-…'.split('')
     this.enableExtendedUnicodeSupport = false

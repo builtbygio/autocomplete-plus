@@ -58,7 +58,7 @@ class AutocompleteManager {
     this.providerManager.initialize()
     this.suggestionList.initialize()
 
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.enableExtendedUnicodeSupport', enableExtendedUnicodeSupport => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.enableExtendedUnicodeSupport', enableExtendedUnicodeSupport => {
       if (enableExtendedUnicodeSupport) {
         this.prefixRegex = new RegExp(`(['"~\`!@#\\$%^&*\\(\\)\\{\\}\\[\\]=+,/\\?>])?(([${UnicodeLetters}\\d_]+[${UnicodeLetters}\\d_-]*)|([.:;[{(< ]+))$`)
         this.wordPrefixRegex = new RegExp(`^[${UnicodeLetters}\\d_]+[${UnicodeLetters}\\d_-]*$`)
@@ -98,7 +98,7 @@ class AutocompleteManager {
     // the labels for its providers.
     this.editor = currentEditor
     this.editorLabels = labels
-    this.editorView = atom.views.getView(this.editor)
+    this.editorView = chevron.views.getView(this.editor)
     this.buffer = this.editor.getBuffer()
 
     this.editorSubscriptions = new CompositeDisposable()
@@ -134,8 +134,8 @@ class AutocompleteManager {
 
   editorIsValid (editor) {
     // TODO: remove conditional when `isTextEditor` is shipped.
-    if (typeof atom.workspace.isTextEditor === 'function') {
-      return atom.workspace.isTextEditor(editor)
+    if (typeof chevron.workspace.isTextEditor === 'function') {
+      return chevron.workspace.isTextEditor(editor)
     } else {
       if (!editor) { return false }
       // Should we disqualify TextEditors with the Grammar text.plain.null-grammar?
@@ -151,7 +151,7 @@ class AutocompleteManager {
   watchEditor (editor, labels) {
     if (this.watchedEditors.has(editor)) return
 
-    let view = atom.views.getView(editor)
+    let view = chevron.views.getView(editor)
 
     if (view.hasFocus()) {
       this.updateCurrentEditor(editor, labels)
@@ -181,25 +181,25 @@ class AutocompleteManager {
   }
 
   handleEvents () {
-    this.subscriptions.add(atom.workspace.observeTextEditors((editor) => {
+    this.subscriptions.add(chevron.workspace.observeTextEditors((editor) => {
       const disposable = this.watchEditor(editor, ['workspace-center'])
       editor.onDidDestroy(() => disposable.dispose())
     }))
 
     // Watch config values
-    this.subscriptions.add(atom.config.observe('autosave.enabled', (value) => { this.autosaveEnabled = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.backspaceTriggersAutocomplete', (value) => { this.backspaceTriggersAutocomplete = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.enableAutoActivation', (value) => { this.autoActivationEnabled = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.enableAutoConfirmSingleSuggestion', (value) => { this.autoConfirmSingleSuggestionEnabled = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.consumeSuffix', (value) => { this.consumeSuffix = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.useAlternateScoring', (value) => { this.useAlternateScoring = value }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.fileBlacklist', (value) => {
+    this.subscriptions.add(chevron.config.observe('autosave.enabled', (value) => { this.autosaveEnabled = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.backspaceTriggersAutocomplete', (value) => { this.backspaceTriggersAutocomplete = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.enableAutoActivation', (value) => { this.autoActivationEnabled = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.enableAutoConfirmSingleSuggestion', (value) => { this.autoConfirmSingleSuggestionEnabled = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.consumeSuffix', (value) => { this.consumeSuffix = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.useAlternateScoring', (value) => { this.useAlternateScoring = value }))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.fileBlacklist', (value) => {
       if (value) {
         this.fileBlacklist = value.map((s) => { return s.trim() })
       }
       this.isCurrentFileBlackListedCache = null
     }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.suppressActivationForEditorClasses', value => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.suppressActivationForEditorClasses', value => {
       this.suppressForClasses = []
       for (let i = 0; i < value.length; i++) {
         const selector = value[i]
@@ -215,7 +215,7 @@ class AutocompleteManager {
   }
 
   handleCommands () {
-    return this.subscriptions.add(atom.commands.add('atom-text-editor', {
+    return this.subscriptions.add(chevron.commands.add('atom-text-editor', {
       'autocomplete-plus:activate': (event) => {
         this.shouldDisplaySuggestions = true
         let activatedManually = true
@@ -225,11 +225,11 @@ class AutocompleteManager {
         this.findSuggestions(activatedManually)
       },
       'autocomplete-plus:navigate-to-description-more-link': () => {
-        let suggestionListView = atom.views.getView(this.editor)
+        let suggestionListView = chevron.views.getView(this.editor)
         let descriptionContainer = suggestionListView.querySelector('.suggestion-description')
         if (descriptionContainer !== null && descriptionContainer.style.display === 'block') {
           let descriptionMoreLink = descriptionContainer.querySelector('.suggestion-description-more-link')
-          atom.applicationDelegate.openExternal(descriptionMoreLink.href)
+          chevron.applicationDelegate.openExternal(descriptionMoreLink.href)
         }
       }
     }))
@@ -468,7 +468,7 @@ See https://github.com/atom/autocomplete-plus/wiki/Provider-API`
   }
 
   displaySuggestions (suggestions, options) {
-    switch (atom.config.get('autocomplete-plus.similarSuggestionRemoval')) {
+    switch (chevron.config.get('autocomplete-plus.similarSuggestionRemoval')) {
       case 'textOrSnippet': {
         suggestions = this.getUniqueSuggestions(suggestions, (suggestion) => suggestion.text + suggestion.snippet)
         break
@@ -650,7 +650,7 @@ See https://github.com/atom/autocomplete-plus/wiki/Provider-API`
     let suffix = (suggestion.snippet != null ? suggestion.snippet : suggestion.text)
     const endPosition = [bufferPosition.row, bufferPosition.column + suffix.length]
     const endOfLineText = editor.getTextInBufferRange([bufferPosition, endPosition])
-    const nonWordCharacters = new Set(atom.config.get('editor.nonWordCharacters').split(''))
+    const nonWordCharacters = new Set(chevron.config.get('editor.nonWordCharacters').split(''))
     while (suffix) {
       if (endOfLineText.startsWith(suffix) && !nonWordCharacters.has(suffix[0])) { break }
       suffix = suffix.slice(1)
@@ -687,7 +687,7 @@ See https://github.com/atom/autocomplete-plus/wiki/Provider-API`
 
   // Private: Gets called when the content has been modified
   requestNewSuggestions () {
-    let delay = atom.config.get('autocomplete-plus.autoActivationDelay')
+    let delay = chevron.config.get('autocomplete-plus.autoActivationDelay')
 
     if (this.delayTimeout != null) {
       clearTimeout(this.delayTimeout)

@@ -24,12 +24,12 @@ class SuggestionList {
     this.emitter = new Emitter()
     this.subscriptions = new CompositeDisposable()
 
-    this.subscriptions.add(atom.commands.add('atom-text-editor.autocomplete-active', {
+    this.subscriptions.add(chevron.commands.add('atom-text-editor.autocomplete-active', {
       'autocomplete-plus:confirm': this.confirmSelection,
       'autocomplete-plus:confirmIfNonDefault': this.confirmSelectionIfNonDefault,
       'autocomplete-plus:cancel': this.cancel
     }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.enableExtendedUnicodeSupport', (enableExtendedUnicodeSupport) => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.enableExtendedUnicodeSupport', (enableExtendedUnicodeSupport) => {
       if (enableExtendedUnicodeSupport) {
         this.wordPrefixRegex = new RegExp(`^[${UnicodeLetters}\\d_-]`)
       } else {
@@ -53,7 +53,7 @@ class SuggestionList {
     }
     this.bindings = new CompositeDisposable()
 
-    const completionKey = atom.config.get('autocomplete-plus.confirmCompletion') || ''
+    const completionKey = chevron.config.get('autocomplete-plus.confirmCompletion') || ''
 
     const keys = {}
     if (completionKey.indexOf('tab') > -1) { keys['tab'] = 'autocomplete-plus:confirm' }
@@ -65,12 +65,12 @@ class SuggestionList {
       }
     }
 
-    this.bindings.add(atom.keymaps.add(
+    this.bindings.add(chevron.keymaps.add(
       'atom-text-editor.autocomplete-active',
       {'atom-text-editor.autocomplete-active': keys})
     )
 
-    const useCoreMovementCommands = atom.config.get('autocomplete-plus.useCoreMovementCommands')
+    const useCoreMovementCommands = chevron.config.get('autocomplete-plus.useCoreMovementCommands')
     const commandNamespace = useCoreMovementCommands ? 'core' : 'autocomplete-plus'
 
     const commands = {}
@@ -111,12 +111,12 @@ class SuggestionList {
       }
     }
 
-    this.bindings.add(atom.commands.add(
-      atom.views.getView(editor), commands)
+    this.bindings.add(chevron.commands.add(
+      chevron.views.getView(editor), commands)
     )
 
     return this.bindings.add(
-      atom.config.onDidChange('autocomplete-plus.useCoreMovementCommands', () => {
+      chevron.config.onDidChange('autocomplete-plus.useCoreMovementCommands', () => {
         return this.addBindings(editor)
       }
       ))
@@ -235,7 +235,7 @@ class SuggestionList {
   }
 
   show (editor, options) {
-    if (atom.config.get('autocomplete-plus.suggestionListFollows') === 'Cursor') {
+    if (chevron.config.get('autocomplete-plus.suggestionListFollows') === 'Cursor') {
       return this.showAtCursorPosition(editor, options)
     } else {
       let { prefix } = options
@@ -275,7 +275,7 @@ class SuggestionList {
         this.displayBufferPosition = bufferPosition
         const marker = this.suggestionMarker = editor.markBufferRange([bufferPosition, bufferPosition])
         this.overlayDecoration = editor.decorateMarker(marker, {type: 'overlay', item: this.suggestionListElement, position: 'tail', class: 'autocomplete-plus'})
-        const editorElement = atom.views.getView(this.activeEditor)
+        const editorElement = chevron.views.getView(this.activeEditor)
         if (editorElement && editorElement.classList) {
           editorElement.classList.add('autocomplete-active')
         }
@@ -295,7 +295,7 @@ class SuggestionList {
     }
     if (marker) {
       this.activeEditor = editor
-      const editorElement = atom.views.getView(this.activeEditor)
+      const editorElement = chevron.views.getView(this.activeEditor)
       if (editorElement && editorElement.classList) {
         editorElement.classList.add('autocomplete-active')
       }
@@ -325,9 +325,9 @@ class SuggestionList {
     } else if (this.overlayDecoration && this.overlayDecoration.destroy) {
       this.overlayDecoration.destroy()
     }
-    const editorElement = atom.views.getView(this.activeEditor)
+    const editorElement = chevron.views.getView(this.activeEditor)
     if (editorElement && editorElement.classList) {
-      atom.views.updateDocument(() => {
+      chevron.views.updateDocument(() => {
         editorElement.classList.remove('autocomplete-active')
       })
     }

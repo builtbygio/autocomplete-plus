@@ -79,16 +79,16 @@ module.exports = class SuggestionListElement {
     this.subscriptions.add(this.model.onDidconfirmSelectionIfNonDefault(this.confirmSelectionIfNonDefault.bind(this)))
     this.subscriptions.add(this.model.onDidDispose(this.dispose.bind(this)))
 
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.suggestionListFollows', suggestionListFollows => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.suggestionListFollows', suggestionListFollows => {
       this.suggestionListFollows = suggestionListFollows
     }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.maxVisibleSuggestions', maxVisibleSuggestions => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.maxVisibleSuggestions', maxVisibleSuggestions => {
       this.maxVisibleSuggestions = maxVisibleSuggestions
     }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.useAlternateScoring', useAlternateScoring => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.useAlternateScoring', useAlternateScoring => {
       this.useAlternateScoring = useAlternateScoring
     }))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.moveToCancel', moveToCancel => {
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.moveToCancel', moveToCancel => {
       this.moveToCancel = moveToCancel
     }))
 
@@ -118,7 +118,7 @@ module.exports = class SuggestionListElement {
   }
 
   onScroll (event) {
-    atom.views.updateDocument(this.renderExtraItems.bind(this))
+    chevron.views.updateDocument(this.renderExtraItems.bind(this))
   }
 
   findItem (event) {
@@ -166,15 +166,15 @@ module.exports = class SuggestionListElement {
   }
 
   itemChanged ({suggestion, index}) {
-    atom.views.updateDocument(this.renderItem.bind(this, suggestion, index))
-    atom.views.updateDocument(this.updateDescription.bind(this))
+    chevron.views.updateDocument(this.renderItem.bind(this, suggestion, index))
+    chevron.views.updateDocument(this.updateDescription.bind(this))
   }
 
   itemsChanged () {
     if (this.model && this.model.items && this.model.items.length) {
       return this.render()
     } else {
-      return atom.views.updateDocument(this.returnItemsToPool.bind(this, 0))
+      return chevron.views.updateDocument(this.returnItemsToPool.bind(this, 0))
     }
   }
 
@@ -182,12 +182,12 @@ module.exports = class SuggestionListElement {
     this.nonDefaultIndex = false
     this.selectedIndex = 0
     this.model.select(this.getSelectedItem())
-    if (atom.views.pollAfterNextUpdate) {
-      atom.views.pollAfterNextUpdate()
+    if (chevron.views.pollAfterNextUpdate) {
+      chevron.views.pollAfterNextUpdate()
     }
 
-    atom.views.updateDocument(this.renderItems.bind(this))
-    atom.views.readDocument(this.readUIPropsFromDOM.bind(this))
+    chevron.views.updateDocument(this.renderItems.bind(this))
+    chevron.views.readDocument(this.readUIPropsFromDOM.bind(this))
   }
 
   moveSelectionUp () {
@@ -266,10 +266,10 @@ module.exports = class SuggestionListElement {
     this.model.select(this.getSelectedItem())
 
     if (index > this.maxVisibleSuggestions + 1) {
-      atom.views.updateDocument(this.renderExtraItems.bind(this))
+      chevron.views.updateDocument(this.renderExtraItems.bind(this))
     }
 
-    return atom.views.updateDocument(this.renderSelectedItem.bind(this))
+    return chevron.views.updateDocument(this.renderSelectedItem.bind(this))
   }
 
   visibleItems () {
@@ -335,7 +335,7 @@ module.exports = class SuggestionListElement {
     }
 
     this.updateDescription(items[longestDescIndex])
-    return atom.views.updateDocument(this.returnItemsToPool.bind(this, items.length))
+    return chevron.views.updateDocument(this.returnItemsToPool.bind(this, items.length))
   }
 
   renderExtraItems () {

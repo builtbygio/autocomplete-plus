@@ -34,8 +34,8 @@ class ProviderManager {
     this.globalBlacklist = new CompositeDisposable()
     this.subscriptions.add(this.globalBlacklist)
 
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.enableBuiltinProvider', value => this.toggleDefaultProvider(value)))
-    this.subscriptions.add(atom.config.observe('autocomplete-plus.scopeBlacklist', value => this.setGlobalBlacklist(value)))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.enableBuiltinProvider', value => this.toggleDefaultProvider(value)))
+    this.subscriptions.add(chevron.config.observe('autocomplete-plus.scopeBlacklist', value => this.setGlobalBlacklist(value)))
   }
 
   dispose () {

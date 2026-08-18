@@ -6,7 +6,7 @@ const {selectorsMatchScopeChain} = require('./scope-helpers')
 module.exports =
 class ProviderConfig {
   constructor (options = {}) {
-    this.atomConfig = options.atomConfig || atom.config
+    this.atomConfig = options.atomConfig || chevron.config
 
     this.config = {}
 
